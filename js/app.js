@@ -3784,9 +3784,11 @@
         window.addEventListener("scroll", handleScroll);
         handleScroll();
         const preloader = document.querySelector(".my-preloader");
-        setTimeout((function() {
-            preloader.style.display = "none";
-        }), 2e3);
+        window.addEventListener("load", (() => {
+            setTimeout((function() {
+                preloader.style.display = "none";
+            }), 2e3);
+        }));
     }));
     window["FLS"] = true;
     isWebp();
