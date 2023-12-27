@@ -185,11 +185,115 @@ h6 {
      object-fit: contain;
 }
 
+body {
+  overflow: hidden;
+}
+
 .title-section {
   font-size: 2rem;
   font-weight: 700;
   text-align: center;
   margin-bottom: 2rem;
+}
+
+.fade-up-section {
+  opacity: 0;
+  -webkit-transition: all 0.8s ease 0s;
+  transition: all 0.8s ease 0s;
+  -webkit-transform: translateY(30%);
+      -ms-transform: translateY(30%);
+          transform: translateY(30%);
+}
+
+.fade-up-section.visible {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+          transform: translateY(0);
+}
+
+.my-preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #141414;
+  z-index: 500;
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-animation: disappearance 2s linear;
+          animation: disappearance 2s linear;
+}
+
+.my-preloader__image {
+  width: 50%;
+  height: 60vh;
+  -webkit-animation: uprise 2s linear;
+          animation: uprise 2s linear;
+}
+
+.my-preloader__image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+@-webkit-keyframes uprise {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes uprise {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes disappearance {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes disappearance {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
 .header {
@@ -847,12 +951,6 @@ h6 {
 }
 
 .order {
-  opacity: 0;
-  -webkit-transition: all 0.6s ease 0s;
-  transition: all 0.6s ease 0s;
-  -webkit-transform: translateY(30%);
-      -ms-transform: translateY(30%);
-          transform: translateY(30%);
   padding-top: 7.5rem;
 }
 
@@ -1220,13 +1318,6 @@ h6 {
 
 .item-address {
   margin-bottom: 0.75rem;
-}
-
-.element-animation.element-show {
-  opacity: 1;
-  -webkit-transform: translateY(0);
-      -ms-transform: translateY(0);
-          transform: translateY(0);
 }
 
 .add-goods {

@@ -3772,6 +3772,25 @@
             }));
         }
     }), 0);
+    document.addEventListener("DOMContentLoaded", (function() {
+        const fadeUpSections = document.querySelectorAll(".fade-up-section");
+        function handleScroll() {
+            fadeUpSections.forEach((section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (sectionTop < windowHeight * .9) section.classList.add("visible"); else section.classList.remove("visible");
+            }));
+        }
+        window.addEventListener("scroll", handleScroll);
+        handleScroll();
+    }));
+    document.addEventListener("DOMContentLoaded", (function() {
+        const preloader = document.querySelector(".my-preloader");
+        setTimeout((function() {
+            preloader.style.display = "none";
+            document.body.style.overflow = "auto";
+        }), 2e3);
+    }));
     window["FLS"] = true;
     isWebp();
     headerScroll();

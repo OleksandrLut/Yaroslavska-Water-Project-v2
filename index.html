@@ -6,15 +6,20 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20231227193733">
+	<link rel="stylesheet" href="css/style.min.css?_v=20231227211915">
 	<link rel="shortcut icon" href="favicon.ico">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css?_v=20231227193733" />
-	<script src="https://kit.fontawesome.com/f85aea2bb3.js?_v=20231227193733" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css?_v=20231227211915" />
+	<script src="https://kit.fontawesome.com/f85aea2bb3.js?_v=20231227211915" crossorigin="anonymous"></script>
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
+	<div class="my-preloader">
+		<div class="my-preloader__image">
+			<img src="img/decor/water_man.svg" alt="water-man">
+		</div>
+	</div>
 	<div class="wrapper">
 		<header data-scroll-show id="header" class="header">
 			<!-- ----------------------- header-contacts+socials ----------------------- -->
@@ -198,7 +203,7 @@
 			</section>
 
 
-			<section class="order section element-animation" id="order">
+			<section class="order section fade-up-section" id="order">
 				<div class="order__container">
 					<div class="order__title title-section">Замовити</div>
 					<div class="order__body">
@@ -408,25 +413,9 @@
 			</script>
 
 			<script>
-				function onEntry(entry) {
-					entry.forEach(change => {
-						if (change.isIntersecting) {
-							change.target.classList.add('element-show');
-						}
-					});
-				}
 
-				let options = {
-					threshold: [0.5]
-				};
-				let observer = new IntersectionObserver(onEntry, options);
-				let elements = document.querySelectorAll('.element-animation');
-
-				for (let elm of elements) {
-					observer.observe(elm);
-				}
 			</script>
-			<section class="add-goods section" id="add-goods">
+			<section class="add-goods section fade-up-section" id="add-goods">
 				<div class="add-goods__container">
 					<h2 class="add-goods__title title-section">У нас додатково у продажу є:</h2>
 
@@ -526,7 +515,7 @@
 			<script>
 
 			</script>
-			<section class="delivery section" id="delivery">
+			<section class="delivery section fade-up-section" id="delivery">
 				<div class="delivery__container">
 					<div class="delivery__title title-section">Доставка</div>
 					<div class="delivery__body">
@@ -552,7 +541,7 @@
 					</div>
 				</div>
 			</section>
-			<section class="info section" id="information">
+			<section class="info section fade-up-section" id="information">
 				<div class="info__container">
 					<h2 class="info__title title-section">Інформація та сертифікати</h2>
 					<div class="info__sub-title">
@@ -693,14 +682,14 @@
 					});
 				});
 			</script>
-			<section class="warranty section">
+			<section class="warranty section fade-up-section">
 				<div class="warranty__container">
 					<div class="warranty__text _icon-qm">
 						100% гарантія поверненння грошей, якщо не сподобалася якість або сервіс!
 					</div>
 				</div>
 			</section>
-			<section class="advantages section">
+			<section class="advantages section fade-up-section">
 				<div class="advantages__container">
 					<div class="advantages__title title-section">
 						Чому вам слід замовити воду саме у нас?
@@ -730,7 +719,7 @@
 				</div>
 			</section>
 		</main>
-		<footer class="footer">
+		<footer class="footer fade-up-section">
 			<div class="footer__container">
 				<div class="footer__logo logo">
 					<div class="logo__image">
@@ -772,8 +761,8 @@
 			</div>
 		</footer>
 	</div>
-	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js?_v=20231227193733"></script>
-	<script src="js/app.min.js?_v=20231227193733"></script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js?_v=20231227211915"></script>
+	<script src="js/app.min.js?_v=20231227211915"></script>
 </body>
 
 </html>
