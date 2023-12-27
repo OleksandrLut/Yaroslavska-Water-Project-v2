@@ -847,6 +847,12 @@ h6 {
 }
 
 .order {
+  opacity: 0;
+  -webkit-transition: all 0.6s ease 0s;
+  transition: all 0.6s ease 0s;
+  -webkit-transform: translateY(30%);
+      -ms-transform: translateY(30%);
+          transform: translateY(30%);
   padding-top: 7.5rem;
 }
 
@@ -1214,6 +1220,13 @@ h6 {
 
 .item-address {
   margin-bottom: 0.75rem;
+}
+
+.element-animation.element-show {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+          transform: translateY(0);
 }
 
 .add-goods {

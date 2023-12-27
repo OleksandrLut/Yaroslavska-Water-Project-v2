@@ -1,179 +1,779 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+	<title>HomePage</title>
 	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<!-- <style>body{opacity: 0;}</style> -->
+	<link rel="stylesheet" href="css/style.min.css?_v=20231227193733">
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css?_v=20231227193733" />
+	<script src="https://kit.fontawesome.com/f85aea2bb3.js?_v=20231227193733" crossorigin="anonymous"></script>
+	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Верстка «Yaroslavska_Water_Project»</title>
 </head>
 
 <body>
-	<div class="rootpage">
-		<h1>Верстка «Yaroslavska_Water_Project»</h1>
-		<div class="rootpage__info">
-			Опис проєкту
-		</div>
-		<h2>Готові сторінки:</h2>
-		<ol class="rootpage__list">
-			<li><a target="_blank" href="home.html">Головна</a></li>
-		</ol>
-		<h2>Попапи:</h2>
-		<ol class="rootpage__list">
-			<li><a target="_blank" href="home.html#"></a></li>
-		</ol>
-		<div class="rootpage__tnx">
-			<h2>Дякую за замовлення!</h2>
-			<p>Буду радий (да) гарному відгуку.</p>
-			<p>Звертайтесь ще!</p>
-		</div>
-		<div class="rootpage__contacts">
-			<h2>Мої контакти:</h2>
-			<p>Пошта: <a href="mailto:email@gmail.com">email@gmail.com</a></p>
-			<p>Телефон: <a href="tel:8800800800">8 800 800 800</a></p>
-			<p>Соц. мережі: <a href="">посилання</a></p>
-		</div>
+	<div class="wrapper">
+		<header data-scroll-show id="header" class="header">
+			<!-- ----------------------- header-contacts+socials ----------------------- -->
+			<div class="header__top top-header">
+				<div class="top-header__container">
+					<div class="header__work-schedule work-schedule">
+						<h5 class="work-schedule__title">Графік роботи:</h5>
+						<p class="work-schedule__hours">9:00 - 20:00</p>
+					</div>
+					<div class="header__contacts">
+						<a href="tel:+38 (066) 585 90 35" class="_icon-phone">+38 (066) 585 90 35</a>
+						<span>/</span>
+						<a href="tel:+38 (066) 585 90 35" id="phone2">+38 (067) 585 90 35</a>
+					</div>
+					<div class="header__socials socials">
+						<a href="" class="socials__item _icon-tg"></a>
+						<a href="" class="socials__item _icon-vb"></a>
+					</div>
+				</div>
+			</div>
+			<!-- --------------------------- header-logo+menu --------------------------- -->
+			<div class="header__main main-header">
+				<div class="main-header__container">
+					<div class="header__logo logo">
+						<div class="logo__image">
+							<img src="img/logo/yaroslavska_logo.svg" alt="yaroslavska-water_logo">
+						</div>
+						<h2 class="logo__title">
+							<p>Вода</p>
+							<p>Ярославська</p>
+						</h2>
+					</div>
+					<div class="header__menu menu">
+						<button type="button" class="menu__icon icon-menu"><span></span></button>
+						<nav class="menu__body">
+							<ul class="menu__list">
+								<li class="menu__item"><a href="#order" class="menu__link menu__link_btn scrolll-link">замовити</a></li>
+								<li class="menu__item"><a href="#delivery" class="menu__link menu__link_link scrolll-link">доставка</a></li>
+								<li class="menu__item"><a href="#information" class="menu__link menu__link_link scrolll-link">інформація</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+
+		</header>
+
+
+		<script>
+			const phoneContact = document.querySelector('#phone2');
+
+			// Функція для перевірки ширини вікна і додавання класу при необхідності
+			function checkWindowSize() {
+				if (window.innerWidth <= 450) {
+					phoneContact.classList.add('_icon-phone');
+				} else {
+					phoneContact.classList.remove('_icon-phone');
+				}
+			}
+
+			// // Викликати функцію при завантаженні сторінки
+			// checkWindowSize();
+
+			// Додавання прослуховувача події для зміни розміру вікна
+			window.addEventListener('resize', checkWindowSize);
+
+			// ===========   плавний скролл до якоря   ==============
+
+			document.addEventListener('DOMContentLoaded', function() {
+
+				const header = document.getElementById('header');
+				const links = document.querySelectorAll('.scrolll-link');
+
+				links.forEach(link => {
+					link.addEventListener('click', function(e) {
+						e.preventDefault();
+
+						const targetId = this.getAttribute('href').substring(1);
+						const targetElement = document.getElementById(targetId);
+						const headerHeight = header.offsetHeight;
+
+						window.scrollTo({
+							top: targetElement.offsetTop - headerHeight,
+							behavior: 'smooth'
+						});
+					});
+				});
+			});
+
+
+			// ===========   Меню бургер   ===========
+			const iconMenu = document.querySelector('.menu__icon');
+			const menuBody = document.querySelector('.menu__body');
+
+			if (iconMenu) {
+				iconMenu.addEventListener('click', function(e) {
+					document.body.classList.toggle('_lock');
+					iconMenu.classList.toggle('_active');
+					menuBody.classList.toggle('_active');
+				});
+
+				// Знайдіть всі пункти меню і додайте для кожного обробник подій
+				const menuItems = document.querySelectorAll('.menu__link');
+				menuItems.forEach(item => {
+					item.addEventListener('click', function() {
+						// Закриття меню після натискання на пункт
+						document.body.classList.remove('_lock');
+						iconMenu.classList.remove('_active');
+						menuBody.classList.remove('_active');
+					});
+				});
+			}
+
+
+
+			// const links = document.querySelectorAll('.menu__link');
+
+			// const iconMenu = document.querySelector('.menu__icon');
+			// const menuBody = document.querySelector('.menu__body');
+
+			// if (links.length > 0) {
+			// 	links.forEach(link => {
+			// 		link.addEventListener('click', clickHandler);
+			// 	});
+
+			// 	function clickHandler(e) {
+			// 		e.preventDefault();
+
+			// 		const href = this.getAttribute('href');
+			// 		const offsetTop = document.querySelector(href).offsetTop;
+			// 		const header = document.querySelector('header');
+			// 		const headerHeight = header.offsetHeight;
+
+			// 		if (iconMenu.classList.contains('_active')) {
+			// 			document.body.classList.remove('_lock');
+			// 			iconMenu.classList.remove('_active');
+			// 			menuBody.classList.remove('_active');
+			// 		}
+
+			// 		scroll({
+			// 			top: offsetTop - headerHeight,
+			// 			behavior: 'smooth',
+			// 		});
+			// 	}
+			// }
+		</script>
+		<main class="page">
+			<section id="main-section" class="main section">
+				<div class="main__wrap">
+					<div class="main__container">
+						<h1 class="main__title">
+							Вода - джерело життя!
+						</h1>
+						<div class="main__body">
+							<div class="main__item main__item_first">
+								<a href="#information" class="main__button scrolll-link">інформація</a>
+							</div>
+							<div class="main__item main__item_second">
+								<a href="#order" class="main__button scrolll-link">Замовити</a>
+							</div>
+							<div class="main__item main__item_third">
+								<a href="#information" class="main__button scrolll-link">Сертифікати</a>
+							</div>
+							<div class="main__item main__item_fourth">
+								<a href="#delivery" class="main__button scrolll-link">Доставка</a>
+							</div>
+							<div class="main__item main__item_fifth">
+								<a href="#add-goods" class="main__button scrolll-link">Додаткові товари</a>
+							</div>
+						</div>
+						<div class="main__footter">
+							<a href="#order" class="scrolll-link">
+								<i class="fa-solid fa-angles-down"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<a href="#main-section" class="button-up scrolll-link">
+					<i class="fa-regular fa-circle-up"></i>
+				</a>
+			</section>
+
+
+			<section class="order section element-animation" id="order">
+				<div class="order__container">
+					<div class="order__title title-section">Замовити</div>
+					<div class="order__body">
+						<div class="order__info info-order">
+							<p class="info-order__text">
+								Доставка нашої води здійснюється в бутлях з полікарбонату (місткістю 18,9 л).
+							</p>
+							<div class="info-order_image">
+								<picture><source srcset="img/image/man.webp" type="image/webp"><img src="img/image/man.png" alt="man_with_water_bottle" class="info-order__img"></picture>
+							</div>
+						</div>
+						<div class="order__form wrap-order">
+							<form action="" class="form-order">
+								<div class="form-order__details details-order">
+
+									<div class="details-order__quantity">
+										<span>Кількість</span>
+										<div class="quantity-input">
+											<button id="reduce-btn" class="quantity-input__btn">
+												<span></span>
+											</button>
+											<input id="quantity-inp" type="number" min="1" value="1">
+											<button id="add-btn" class="quantity-input__btn">
+												<span>+</span>
+											</button>
+										</div>
+										<div class="quantity-price">
+											<span id="price-for-quantity-bottle">23.75</span>
+											<span>грн</span>
+										</div>
+									</div>
+
+									<div class="details-order__new-packaging new-packaging">
+										<div class="new-packaging__checkbox">
+											<input type="checkbox" name="new-packaging" id="new-packaging-inp" class="new-packaging__inp">
+											<label for="new-packaging-inp">
+												<span class="packaging-text">Нова тара</span>
+												<span class="packaging-hint-logo">?</span>
+												<div class="new-packaging__hint hint-packaging">
+													<div class="hint-packaging__body">
+														<div class="hint-packaging__contetn">
+															Якщо ви не маєте тари на обмін, виберіть цей пункт!
+														</div>
+													</div>
+												</div>
+											</label>
+										</div>
+										<div class="new-packaging__price">
+											<span id="new-packaging-price">350</span>
+											<span>грн</span>
+										</div>
+									</div>
+
+									<div class="details-order__delivery delivery-order">
+										<p class="delivery-order__text">Доставка:</p>
+										<div class="delivery-order__price">
+											<span id="delivery-price">150</span>
+											<span>грн</span>
+										</div>
+									</div>
+
+									<div class="details-order__more-products more-products">
+										<button type="button" class="more-products__button-more">Додатково</button>
+										<div class="more-products__body">
+											<ul class="more-products__list">
+												<li class="more-products__item">
+													<input type="checkbox" name="more-products" id="plug" value="5">
+													<label for="plug">Пробка для бутлів</label>
+												</li>
+												<li class="more-products__item">
+													<input type="checkbox" name="more-products" id="handle" value="30">
+													<label for="handle">Ручка для бутля 20л</label>
+												</li>
+												<li class="more-products__item">
+													<input type="checkbox" name="more-products" id="bottle-6l" value="25">
+													<label for="bottle-6l">Бутель ПЕТФ 6л з кришкою та ручкою</label>
+												</li>
+											</ul>
+										</div>
+									</div>
+
+									<div class="details-order__total">
+										<p>Вартість:</p>
+										<div>
+											<div id="total-price">173.75</div>
+											<span>грн</span>
+										</div>
+									</div>
+
+								</div>
+
+								<div class="form-order__client-info client-info-form">
+									<div class="client-info-form__item item-name">
+										<label for="username">Ім'я:</label>
+										<input required class="input-form" type="text" name="" id="username" placeholder="Ім'я" oninput="formatInput()" />
+									</div>
+									<div class="client-info-form__item item-phone">
+										<label for="user-phone">Номер телефону:</label>
+										<input required class="input-form" type="tel" name="" id="user-phone" placeholder="067 000 00 00" oninput="formatPhone()" />
+									</div>
+									<div class="client-info-form__item item-address">
+										<label for="user-address">Адрес:</label>
+										<input required class="input-form" type="text" name="" id="user-address" placeholder="вул., буд., кв." />
+									</div>
+									<div class="client-info-form__btn">
+										<button class="client-info-form__button" id="form-button">Оформити замовлення</button>
+										<div class="client-info-form__hint">
+											<p>Заповніть всі поля форми!</p>
+										</div>
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<script>
+				const quantityElement = document.getElementById('quantity-inp'); // input з кількістю
+				const bottlePriceElement = document.getElementById('price-for-quantity-bottle'); // span з ціною за 19л
+				const newBottleCheckbox = document.getElementById('new-packaging-inp'); // checkbox з новою тарою
+				const totalPriceElement = document.getElementById('total-price'); // загальна вартість
+
+				let basePrice = 23.75; // Базова ціна за одиницю (19л)
+				let quantity = parseInt(quantityElement.value); // кількість (шт)
+				let deliveryPrice = 150;
+				let newBottlePrice = newBottleCheckbox.checked ? 350 : 0; //  ціна нового бутля
+				let additionalOptionsPrice = 0;
+
+				function updateData() {
+					quantityElement.value = quantity;
+					bottlePriceElement.innerText = quantity * basePrice;
+					totalPriceElement.innerText = quantity * basePrice + deliveryPrice + newBottlePrice * quantity;
+				}
+
+				document.getElementById('add-btn').addEventListener('click', function(event) {
+					event.preventDefault();
+					quantity++;
+					updateData();
+				});
+
+				document.getElementById('reduce-btn').addEventListener('click', function(event) {
+					if (quantity > 1) {
+						event.preventDefault();
+						quantity--;
+						updateData();
+					}
+				});
+
+				newBottleCheckbox.addEventListener('change', function(event) {
+					event.preventDefault();
+					newBottlePrice = this.checked ? 350 : 0;
+					updateData();
+				});
+
+				// document.getElementById('form-button').addEventListener('click', function (event) {
+				//   event.preventDefault();
+				//   // Код для обробки події натискання кнопки "Оформити замовлення"
+				// });
+
+				function formatInput() {
+					let input = document.getElementById('username');
+					let value = input.value.trim();
+					let formattedValue = value.charAt(0).toUpperCase() + value.slice(1);
+					input.value = formattedValue;
+				}
+
+				function formatPhone() {
+					let input = document.getElementById('user-phone');
+					let value = input.value;
+					let formattedValue = value.replace(/\D/g, '');
+
+					// Check if formatted value doesn't start with '38'
+					if (!formattedValue.startsWith('38')) {
+						formattedValue = '38' + formattedValue;
+					}
+
+					// Update the regular expression pattern to correctly capture the phone number groups
+					formattedValue = formattedValue.replace(/^(\d{2})(\d{3})(\d{3})(\d{2})(\d{2})/, '+$1 $2 $3 $4 $5');
+
+					input.value = formattedValue;
+				}
+
+				const formButton = document.getElementById('form-button');
+
+				function setDisabledAttribute() {
+					const userName = document.getElementById('username').value;
+					const userPhone = document.getElementById('user-phone').value;
+					const userAddress = document.getElementById('user-address').value;
+					const hint = document.querySelector('.client-info-form__hint')
+
+					if (userName && userPhone && userAddress) {
+						formButton.removeAttribute('disabled');
+						hint.style.display = 'none';
+						// hint.style.visibility = 'hidden';
+					} else {
+						formButton.setAttribute('disabled', 'disabled');
+					}
+				}
+
+				document.getElementById('username').addEventListener('input', setDisabledAttribute);
+				document.getElementById('user-phone').addEventListener('input', setDisabledAttribute);
+				document.getElementById('user-address').addEventListener('input', setDisabledAttribute);
+
+				setDisabledAttribute();
+			</script>
+
+			<script>
+				function onEntry(entry) {
+					entry.forEach(change => {
+						if (change.isIntersecting) {
+							change.target.classList.add('element-show');
+						}
+					});
+				}
+
+				let options = {
+					threshold: [0.5]
+				};
+				let observer = new IntersectionObserver(onEntry, options);
+				let elements = document.querySelectorAll('.element-animation');
+
+				for (let elm of elements) {
+					observer.observe(elm);
+				}
+			</script>
+			<section class="add-goods section" id="add-goods">
+				<div class="add-goods__container">
+					<h2 class="add-goods__title title-section">У нас додатково у продажу є:</h2>
+
+					<!-- Оболонка слайдера -->
+					<div class="add-goods__slider swiper">
+						<!-- Частина слайдера, що рухається -->
+						<div class="add-goods__wrapper swiper-wrapper">
+							<!-- Слайд -->
+							<div class="add-goods__slide card swiper-slide">
+								<div class="card__image">
+									<picture><source srcset="img/card-images/image_bottle-plug.webp" type="image/webp"><img src="img/card-images/image_bottle-plug.png" alt="image_bottle_plug" class="card__img" /></picture>
+								</div>
+								<div class="card__body">
+									<h3 class="card__title">Пробка для бутлів</h3>
+									<div class="card__price"><span>5.00</span> грн</div>
+								</div>
+							</div>
+
+							<div class="add-goods__slide card swiper-slide">
+								<div class="card__image">
+									<picture><source srcset="img/card-images/image_bottle_5l.webp" type="image/webp"><img src="img/card-images/image_bottle_5l.png" alt="image_bottle_bottle_5l" class="card__img" /></picture>
+								</div>
+								<div class="card__body">
+									<h3 class="card__title">Бутель ПЕТФ 5л з кришкою та ручкою</h3>
+									<div class="card__price"><span>22.00</span> грн</div>
+								</div>
+							</div>
+
+							<div class="add-goods__slide card swiper-slide">
+								<div class="card__image">
+									<picture><source srcset="img/card-images/image_bottle_6l.webp" type="image/webp"><img src="img/card-images/image_bottle_6l.png" alt="image_bottle_bottle_6l" class="card__img" /></picture>
+								</div>
+								<div class="card__body">
+									<h3 class="card__title">Бутель ПЕТФ 6л з кришкою та ручкою</h3>
+									<div class="card__price"><span>25.00</span> грн</div>
+								</div>
+							</div>
+
+							<div class="add-goods__slide card swiper-slide">
+								<div class="card__image">
+									<picture><source srcset="img/card-images/image_bottle_10l.webp" type="image/webp"><img src="img/card-images/image_bottle_10l.png" alt="image_bottle_10l" class="card__img" /></picture>
+								</div>
+								<div class="card__body">
+									<h3 class="card__title">Бутель ПЕТФ 10л з кришкою та ручкою</h3>
+									<div class="card__price"><span>35.00</span> грн</div>
+								</div>
+							</div>
+
+							<div class="add-goods__slide card swiper-slide">
+								<div class="card__image">
+									<picture><source srcset="img/card-images/handle.webp" type="image/webp"><img src="img/card-images/handle.png" alt="image_bottle_рфтвду" class="card__img" /></picture>
+								</div>
+								<div class="card__body">
+									<h3 class="card__title">Ручка для бутля 18,9л</h3>
+									<div class="card__price"><span>80.00</span> грн</div>
+								</div>
+							</div>
+
+							<div class="add-goods__slide card swiper-slide">
+								<div class="card__image">
+									<picture><source srcset="img/card-images/water_pump.webp" type="image/webp"><img src="img/card-images/water_pump.png" alt="image_bottle_water_pump" class="card__img" /></picture>
+								</div>
+								<div class="card__body">
+									<h3 class="card__title">Помпа для води</h3>
+									<div class="card__price"><span>150.00</span> грн</div>
+								</div>
+							</div>
+
+							<div class="add-goods__slide card swiper-slide">
+								<div class="card__image">
+									<picture><source srcset="img/card-images/water_pump_electric.webp" type="image/webp"><img src="img/card-images/water_pump_electric.png" alt="image_bottle_water_pump_electric" class="card__img" /></picture>
+								</div>
+								<div class="card__body">
+									<h3 class="card__title">Помпа для води електрична</h3>
+									<div class="card__price"><span>230.00</span> грн</div>
+								</div>
+							</div>
+
+						</div>
+						<!-- Якщо потрібна навігація (ліворуч/праворуч) -->
+						<button type="button" class="swiper-button-prev"></button>
+						<button type="button" class="swiper-button-next"></button>
+						<!-- Якщо потрібна пагінація -->
+						<div class="swiper-pagination"></div>
+						<!-- Якщо потрібен скролбар -->
+						<!-- <div class="swiper-scrollbar"></div> -->
+					</div>
+
+
+
+				</div>
+
+
+			</section>
+
+
+			<script>
+
+			</script>
+			<section class="delivery section" id="delivery">
+				<div class="delivery__container">
+					<div class="delivery__title title-section">Доставка</div>
+					<div class="delivery__body">
+						<div class="delivery__content">
+							<p>
+								Для зберігання властивостей і безпечного зберігання вода потребує відповідної тари. Доставка нашої води здійснюється в
+								бутлях з полікарбонату (місткістю 18,9 л). Такий матеріал є добрим замінником скла, тому бутлі надійно витримують
+								механічні навантаження і на противагу тарі, виготовленій з пластику, вони повністю інертні (нейтральні до речовин, які в
+								них зберігаються) і можуть використовуватись багаторазово. Тара, якою ми користуємося, сертифікована.
+							</p>
+							<p>
+								Користуйтеся нашою водою та будьте певні, що п’єте чисту та корисну воду.
+							</p>
+						</div>
+						<div class="delivery__info info-delivery">
+							<h4 class="info-delivery__title">
+								Ми доставляємо воду по м.Київ в межах району Позняки:
+							</h4>
+							<div class="info-delivery__map">
+								<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11550.689226563427!2d30.63193464709858!3d50.40803021764459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1suk!2sua!4v1701627286508!5m2!1suk!2sua" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="info section" id="information">
+				<div class="info__container">
+					<h2 class="info__title title-section">Інформація та сертифікати</h2>
+					<div class="info__sub-title">
+						Вода <strong>ЯРОСЛАВСЬКА</strong> мінералізована і містить необхідні для щоденного вживання мікроелементи:
+					</div>
+					<div class="info__body">
+
+						<div class="info__item item-info">
+							<div class="item-info__content">
+								Магній бере участь у енергетичному обміні.Сприяє розслабленню м'язових волокон (мускулатури судин та внутрішніх
+								органів).
+							</div>
+							<div class="item-info__image">
+								<img src="img/decor/Mg.svg" alt="">
+							</div>
+						</div>
+
+						<div class="info__item item-info">
+							<div class="item-info__content">
+								Кремній підвищує імунітет, зніжує рівень цукру та холестерину. Виводить пісок та каміння з нирок та сечовика.
+							</div>
+							<div class="item-info__image">
+								<img src="img/decor/Si.svg" alt="">
+							</div>
+						</div>
+
+						<div class="info__item item-info">
+							<div class="item-info__content">
+								Кальцій, основа кісткової тканини, бере участь у передачі нервових імпульсів у нервовій системі.
+							</div>
+							<div class="item-info__image">
+								<img src="img/decor/Ca.svg" alt="">
+							</div>
+						</div>
+
+						<div class="info__item item-info">
+							<div class="item-info__content">
+								Вуглець, має чудові сорбційні, каталітичні та бактерицидні властивості. Насичує волосся та шкіру голови необхідними
+								мікроелементами.
+							</div>
+							<div class="item-info__image">
+								<img src="img/decor/C.svg" alt="">
+							</div>
+						</div>
+
+						<div class="info__item item-info">
+							<div class="item-info__content">
+								Натрій, нормалізує водний та кислотно-лужний обмін в організмі.
+							</div>
+							<div class="item-info__image">
+								<img src="img/decor/Na.svg" alt="">
+							</div>
+						</div>
+
+					</div>
+					<div class="info__certificates certificates-info">
+						<div class="certificates-info__title">
+							Вода проходить постійне тестування і відповідає існуючим стандартам якості НД Сан. Пін 2.2.4-171-10
+						</div>
+						<ul class="certificates-info__list">
+							<li class="certificates-info__item">
+								<button type="button" class="certificates-info__link _icon-doc popup-button-open" data-target="certificat-1">Сертифікат відповідності на воду</button>
+							</li>
+							<li class="certificates-info__item">
+								<button type="button" class="certificates-info__link _icon-doc popup-button-open" data-target="certificat-2">Висновок державної санітарно-епідеміологічної експертизи (Вода)</button>
+							</li>
+							<li class="certificates-info__item">
+								<button type="button" class="certificates-info__link _icon-doc popup-button-open" data-target="certificat-3">Висновок державної санітарно-епідемологічної експертизи (Тара)</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div id="certificat-1" class="popup">
+					<div class="popup__wrapper">
+						<div class="popup__content">
+							<button type="button" class="popup__close popup-close">Закрити</button>
+							<div class="popup__image">
+								<picture><source srcset="img/certificats/sertifikat-vidpovidnosti-2020-2022-rr.-voda-mikolinska.webp" type="image/webp"><img src="img/certificats/sertifikat-vidpovidnosti-2020-2022-rr.-voda-mikolinska.jpg" alt="sertifikat-vidpovidnosti"></picture>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="certificat-2" class="popup">
+					<div class="popup__wrapper">
+						<div class="popup__content">
+							<button type="button" class="popup__close popup-close">Закрити</button>
+							<div class="popup__image">
+								<picture><source srcset="img/certificats/elastych.vysnovky-dsee-lyst1.webp" type="image/webp"><img src="img/certificats/elastych.vysnovky-dsee-lyst1.jpeg" alt="sertifikat-vidpovidnosti"></picture>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="certificat-3" class="popup">
+					<div class="popup__wrapper">
+						<div class="popup__content">
+							<button type="button" class="popup__close popup-close">Закрити</button>
+							<div class="popup__image">
+								<picture><source srcset="img/certificats/sertifikat-vidpovidnosti-2020-2022-rr.-voda-mikolinska.webp" type="image/webp"><img src="img/certificats/sertifikat-vidpovidnosti-2020-2022-rr.-voda-mikolinska.jpg" alt="sertifikat-vidpovidnosti"></picture>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			</section>
+
+			<script>
+				document.addEventListener('DOMContentLoaded', function() {
+					const openButtons = document.querySelectorAll('.popup-button-open');
+					const closeButtons = document.querySelectorAll('.popup-close');
+					const popups = document.querySelectorAll('.popup');
+					const body = document.querySelector('body');
+					const timeout = 800;
+
+					function openPopup(targetId) {
+						const targetPopup = document.getElementById(targetId);
+						targetPopup.classList.add('open');
+					}
+
+					function closePopup() {
+						popups.forEach(popup => {
+							popup.classList.remove('open');
+						});
+					}
+
+					openButtons.forEach(button => {
+						button.addEventListener('click', function() {
+							const targetId = this.getAttribute('data-target');
+							openPopup(targetId);
+						});
+					});
+
+					closeButtons.forEach(button => {
+						button.addEventListener('click', closePopup);
+					});
+				});
+			</script>
+			<section class="warranty section">
+				<div class="warranty__container">
+					<div class="warranty__text _icon-qm">
+						100% гарантія поверненння грошей, якщо не сподобалася якість або сервіс!
+					</div>
+				</div>
+			</section>
+			<section class="advantages section">
+				<div class="advantages__container">
+					<div class="advantages__title title-section">
+						Чому вам слід замовити воду саме у нас?
+					</div>
+					<div class="advantages__body">
+						<p>Якщо вас цікавить доставка води в Києві, то ми підготували список переваг нашої компанії:</p>
+						<ul class="advantages__list">
+							<li>
+								Оперативність – ми гарантуємо доставку води в будь-яку точку Києва протягом 1 години з моменту замовлення.
+							</li>
+							<li>
+								Висока якість сервісу – ми дорожимо професійною репутацією і готові оплатити витрати, в разі непередбачених обставин.
+							</li>
+							<li>
+								Відповідність стандартам – продукція нормується по ДСТУ, а також міжнародним вимогам.
+							</li>
+							<li>
+								Свідомий підхід до споживання – ми уважно ставимося до питання збереження навколишнього середовища, а тому
+								використовуємо сировину, яка піддається вторинній переробці.
+							</li>
+						</ul>
+						<p>
+							У нас ви можете здати бутлі інших фірм, замість того, щоб викидати їх. Наша доставка води – це швидко, корисно для
+							здоров’я і безпечно для навколишнього середовища!
+						</p>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer class="footer">
+			<div class="footer__container">
+				<div class="footer__logo logo">
+					<div class="logo__image">
+						<img src="img/logo/yaroslavska_logo.svg" alt="yaroslavska-water_logo">
+					</div>
+					<h2 class="logo__title">
+						<p>Вода</p>
+						<p>Ярославська</p>
+					</h2>
+				</div>
+				<div class="footer__work-schedule">
+					<h4>Графік роботи:</h4>
+					<div>9:00 - 20:00</div>
+				</div>
+				<div class="footer__contacts contacts-footer">
+					<h4 class="contacts-footer__tile">Контакти:</h4>
+					<div class="contacts-footer__items">
+						<a href="tel:+380675859035" class="contacts-footer__item _icon-phone">+38 (067) 585 90 35</a>
+						<a href="tel:+380665859035" class="contacts-footer__item _icon-phone">+38 (066) 585 90 35</a>
+					</div>
+					<div class="contacts-footer__socials">
+						<a class="_icon-vb"></a>
+						<a class="_icon-tg"></a>
+					</div>
+				</div>
+				<nav class="footer__menu menu-footer">
+					<ul class="menu-footer__list">
+						<li class="menu-footer__item">
+							<a href="#order" class="menu-footer__link scrolll-link">Замовити</a>
+						</li>
+						<li class="menu-footer__item">
+							<a href="#delivery" class="menu-footer__link scrolll-link">Доставка</a>
+						</li>
+						<li class="menu-footer__item">
+							<a href="#information" class="menu-footer__link scrolll-link">Інформація</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</footer>
 	</div>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js?_v=20231227193733"></script>
+	<script src="js/app.min.js?_v=20231227193733"></script>
 </body>
-<style>
-	@charset "UTF-8";
-	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
-
-	*,
-	*::before,
-	*::after {
-		padding: 0px;
-		margin: 0px;
-		border: 0px;
-		box-sizing: border-box;
-	}
-
-	html,
-	body {
-		height: 100%;
-		margin: 0;
-		padding: 0;
-		min-width: 320px;
-		width: 100%;
-		color: #fff;
-		background-color: #5e5373;
-	}
-
-	body {
-		font-family: Montserrat;
-		font-size: 100%;
-		line-height: 1;
-		font-size: 1rem;
-	}
-
-	a {
-		text-decoration: underline;
-		color: #ebe691
-	}
-
-	a:visited {
-		text-decoration: underline;
-		color: #aaa768;
-	}
-
-	a:hover {
-		text-decoration: none;
-	}
-
-	ul li {
-		list-style: none;
-	}
-
-	img {
-		vertical-align: top;
-	}
-
-	.wrapper {
-		width: 100%;
-		min-height: 100%;
-		overflow: hidden;
-	}
-
-	.rootpage {
-		padding: 30px;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-	}
-
-	@media (max-width: 767px) {
-		.rootpage {
-			padding: 30px 15px;
-		}
-	}
-
-	h1 {
-		color: #ebe691;
-		font-size: 2.5rem;
-		margin: 0px 0px 1.25rem 0px;
-	}
-
-	@media (max-width: 767px) {
-		h1 {
-			font-size: 1.85rem;
-			margin: 0px 0px 1.25rem 0px;
-		}
-	}
-
-	h2 {
-		color: #ebe691;
-		font-size: 1.25rem;
-		margin: 0px 0px 1rem 0px;
-	}
-
-	@media (max-width: 767px) {
-		h2 {
-			font-size: 1.125rem;
-			margin: 0px 0px 1rem 0px;
-		}
-	}
-
-	.rootpage__info {
-		line-height: 140%;
-		margin: 0px 0px 1.5rem 0px;
-	}
-
-	.rootpage__list {
-		margin: 0px 0px 2.25rem 1.25rem;
-	}
-
-	.rootpage__list li:not(:last-child) {
-		margin: 0px 0px 15px 0px;
-	}
-
-	.rootpage__contacts,
-	.rootpage__tnx {
-		border-radius: 200px;
-		padding: 20px 65px;
-		line-height: 140%;
-	}
-
-	@media (max-width: 767px) {
-
-		.rootpage__contacts,
-		.rootpage__tnx {
-			border-radius: 40px;
-			padding: 20px;
-		}
-	}
-
-	.rootpage__contacts {
-		background: #32b5a4;
-
-	}
-
-	.rootpage__contacts a {
-		color: #ebe691;
-	}
-
-	.rootpage__tnx {
-		background: #c22d63;
-		margin: 0px 0px 1rem 0px;
-	}
-</style>
 
 </html>
