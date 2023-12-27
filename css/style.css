@@ -226,15 +226,15 @@ h6 {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-animation: disappearance 2s linear;
-          animation: disappearance 2s linear;
+  -webkit-animation: disappearance 2.2s linear;
+          animation: disappearance 2.2s linear;
 }
 
 .my-preloader__image {
   width: 50%;
   height: 60vh;
-  -webkit-animation: uprise 2s linear;
-          animation: uprise 2s linear;
+  -webkit-animation: uprise 2.2s linear;
+          animation: uprise 2.2s linear;
 }
 
 .my-preloader__image img {
