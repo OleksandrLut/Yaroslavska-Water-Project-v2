@@ -185,10 +185,6 @@ h6 {
      object-fit: contain;
 }
 
-body {
-  overflow: hidden;
-}
-
 .title-section {
   font-size: 2rem;
   font-weight: 700;

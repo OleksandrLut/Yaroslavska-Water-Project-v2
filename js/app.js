@@ -3783,12 +3783,9 @@
         }
         window.addEventListener("scroll", handleScroll);
         handleScroll();
-    }));
-    document.addEventListener("DOMContentLoaded", (function() {
         const preloader = document.querySelector(".my-preloader");
         setTimeout((function() {
             preloader.style.display = "none";
-            document.body.style.overflow = "auto";
         }), 2e3);
     }));
     window["FLS"] = true;
