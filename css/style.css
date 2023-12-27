@@ -1249,16 +1249,16 @@ h6 {
 }
 
 .swiper-pagination {
-  position: static;
-  margin-top: 20px;
+  position: static !important;
+  margin-top: 20px !important;
 }
 
 .swiper-pagination-bullet {
-  width: 1.25rem;
-  height: 1.25rem;
-  line-height: 1.25rem;
-  font-size: 0.875rem;
-  background-color: #fff;
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+  line-height: 1.25rem !important;
+  font-size: 0.875rem !important;
+  background-color: #fff !important;
 }
 
 .swiper-button-prev {
