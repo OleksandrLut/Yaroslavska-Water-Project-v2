@@ -6,16 +6,17 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20231219213946">
+	<link rel="stylesheet" href="css/style.min.css?_v=20231227182021">
 	<link rel="shortcut icon" href="favicon.ico">
-	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css?_v=20231219213946" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css?_v=20231227182021" />
+	<script src="https://kit.fontawesome.com/f85aea2bb3.js?_v=20231227182021" crossorigin="anonymous"></script>
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
 	<div class="wrapper">
-		<header class="header">
+		<header data-scroll-show id="header" class="header">
 			<!-- ----------------------- header-contacts+socials ----------------------- -->
 			<div class="header__top top-header">
 				<div class="top-header__container">
@@ -50,9 +51,9 @@
 						<button type="button" class="menu__icon icon-menu"><span></span></button>
 						<nav class="menu__body">
 							<ul class="menu__list">
-								<li class="menu__item"><a href="#order" class="menu__link menu__link_btn">замовити</a></li>
-								<li class="menu__item"><a href="#delivery" class="menu__link menu__link_link">доставка</a></li>
-								<li class="menu__item"><a href="#information" class="menu__link menu__link_link">інформація</a></li>
+								<li class="menu__item"><a href="#order" class="menu__link menu__link_btn scrolll-link">замовити</a></li>
+								<li class="menu__item"><a href="#delivery" class="menu__link menu__link_link scrolll-link">доставка</a></li>
+								<li class="menu__item"><a href="#information" class="menu__link menu__link_link scrolll-link">інформація</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -82,24 +83,50 @@
 
 			// ===========   плавний скролл до якоря   ==============
 
-			// document.addEventListener('DOMContentLoaded', function () {
-			// 	const links = document.querySelectorAll('.menu__link');
+			document.addEventListener('DOMContentLoaded', function() {
 
-			// 	links.forEach(link => {
-			// 		link.addEventListener('click', function (e) {
-			// 			e.preventDefault();
+				const header = document.getElementById('header');
+				const links = document.querySelectorAll('.scrolll-link');
 
-			// 			const targetId = this.getAttribute('href').substring(1);
-			// 			const targetElement = document.getElementById(targetId);
+				links.forEach(link => {
+					link.addEventListener('click', function(e) {
+						e.preventDefault();
 
-			// 			window.scrollTo({
-			// 				top: targetElement.offsetTop,
-			// 				behavior: 'smooth'
-			// 			});
-			// 		});
-			// 	});
-			// });
+						const targetId = this.getAttribute('href').substring(1);
+						const targetElement = document.getElementById(targetId);
+						const headerHeight = header.offsetHeight;
 
+						window.scrollTo({
+							top: targetElement.offsetTop - headerHeight,
+							behavior: 'smooth'
+						});
+					});
+				});
+			});
+
+
+			// ===========   Меню бургер   ===========
+			const iconMenu = document.querySelector('.menu__icon');
+			const menuBody = document.querySelector('.menu__body');
+
+			if (iconMenu) {
+				iconMenu.addEventListener('click', function(e) {
+					document.body.classList.toggle('_lock');
+					iconMenu.classList.toggle('_active');
+					menuBody.classList.toggle('_active');
+				});
+
+				// Знайдіть всі пункти меню і додайте для кожного обробник подій
+				const menuItems = document.querySelectorAll('.menu__link');
+				menuItems.forEach(item => {
+					item.addEventListener('click', function() {
+						// Закриття меню після натискання на пункт
+						document.body.classList.remove('_lock');
+						iconMenu.classList.remove('_active');
+						menuBody.classList.remove('_active');
+					});
+				});
+			}
 
 
 
@@ -135,7 +162,7 @@
 			// }
 		</script>
 		<main class="page">
-			<section class="main section">
+			<section id="main-section" class="main section">
 				<div class="main__wrap">
 					<div class="main__container">
 						<h1 class="main__title">
@@ -143,24 +170,31 @@
 						</h1>
 						<div class="main__body">
 							<div class="main__item main__item_first">
-								<a href="#information" class="main__button">інформація</a>
+								<a href="#information" class="main__button scrolll-link">інформація</a>
 							</div>
 							<div class="main__item main__item_second">
-								<a href="#order" class="main__button">Замовити</a>
+								<a href="#order" class="main__button scrolll-link">Замовити</a>
 							</div>
 							<div class="main__item main__item_third">
-								<a href="#information" class="main__button">Сертифікати</a>
+								<a href="#information" class="main__button scrolll-link">Сертифікати</a>
 							</div>
 							<div class="main__item main__item_fourth">
-								<a href="#delivery" class="main__button">Доставка</a>
+								<a href="#delivery" class="main__button scrolll-link">Доставка</a>
 							</div>
 							<div class="main__item main__item_fifth">
-								<a href="#add-goods" class="main__button">Додаткові товари</a>
+								<a href="#add-goods" class="main__button scrolll-link">Додаткові товари</a>
 							</div>
 						</div>
-						<div class="main__footter"></div>
+						<div class="main__footter">
+							<a href="#order" class="scrolll-link">
+								<i class="fa-solid fa-angles-down"></i>
+							</a>
+						</div>
 					</div>
 				</div>
+				<a href="#main-section" class="button-up scrolll-link">
+					<i class="fa-regular fa-circle-up"></i>
+				</a>
 			</section>
 
 
@@ -186,13 +220,13 @@
 											<button id="reduce-btn" class="quantity-input__btn">
 												<span></span>
 											</button>
-											<input id="quantity-inp" type="number" id="quantity" min="1" value="1">
+											<input id="quantity-inp" type="number" min="1" value="1">
 											<button id="add-btn" class="quantity-input__btn">
 												<span>+</span>
 											</button>
 										</div>
 										<div class="quantity-price">
-											<span id="price-for-quantity-bottle">1123.75</span>
+											<span id="price-for-quantity-bottle">23.75</span>
 											<span>грн</span>
 										</div>
 									</div>
@@ -249,7 +283,7 @@
 									<div class="details-order__total">
 										<p>Вартість:</p>
 										<div>
-											<div id="totai-price">173.75</div>
+											<div id="total-price">173.75</div>
 											<span>грн</span>
 										</div>
 									</div>
@@ -263,13 +297,18 @@
 									</div>
 									<div class="client-info-form__item item-phone">
 										<label for="user-phone">Номер телефону:</label>
-										<input required class="input-form" type="tel" name="" id="user-phone" placeholder="+38 067 000 00 00" oninput="formatPhone()" />
+										<input required class="input-form" type="tel" name="" id="user-phone" placeholder="067 000 00 00" oninput="formatPhone()" />
 									</div>
 									<div class="client-info-form__item item-address">
 										<label for="user-address">Адрес:</label>
 										<input required class="input-form" type="text" name="" id="user-address" placeholder="вул., буд., кв." />
 									</div>
-									<button class="client-info-form__button" id="form-button">Оформити замовлення</button>
+									<div class="client-info-form__btn">
+										<button class="client-info-form__button" id="form-button">Оформити замовлення</button>
+										<div class="client-info-form__hint">
+											<p>Заповніть всі поля форми!</p>
+										</div>
+									</div>
 								</div>
 
 							</form>
@@ -279,159 +318,193 @@
 			</section>
 
 			<script>
+				const quantityElement = document.getElementById('quantity-inp'); // input з кількістю
+				const bottlePriceElement = document.getElementById('price-for-quantity-bottle'); // span з ціною за 19л
+				const newBottleCheckbox = document.getElementById('new-packaging-inp'); // checkbox з новою тарою
+				const totalPriceElement = document.getElementById('total-price'); // загальна вартість
 
+				let basePrice = 23.75; // Базова ціна за одиницю (19л)
+				let quantity = parseInt(quantityElement.value); // кількість (шт)
+				let deliveryPrice = 150;
+				let newBottlePrice = newBottleCheckbox.checked ? 350 : 0; //  ціна нового бутля
+				let additionalOptionsPrice = 0;
+
+				function updateData() {
+					quantityElement.value = quantity;
+					bottlePriceElement.innerText = quantity * basePrice;
+					totalPriceElement.innerText = quantity * basePrice + deliveryPrice + newBottlePrice * quantity;
+				}
+
+				document.getElementById('add-btn').addEventListener('click', function(event) {
+					event.preventDefault();
+					quantity++;
+					updateData();
+				});
+
+				document.getElementById('reduce-btn').addEventListener('click', function(event) {
+					if (quantity > 1) {
+						event.preventDefault();
+						quantity--;
+						updateData();
+					}
+				});
+
+				newBottleCheckbox.addEventListener('change', function(event) {
+					event.preventDefault();
+					newBottlePrice = this.checked ? 350 : 0;
+					updateData();
+				});
+
+				// document.getElementById('form-button').addEventListener('click', function (event) {
+				//   event.preventDefault();
+				//   // Код для обробки події натискання кнопки "Оформити замовлення"
+				// });
+
+				function formatInput() {
+					let input = document.getElementById('username');
+					let value = input.value.trim();
+					let formattedValue = value.charAt(0).toUpperCase() + value.slice(1);
+					input.value = formattedValue;
+				}
+
+				function formatPhone() {
+					let input = document.getElementById('user-phone');
+					let value = input.value;
+					let formattedValue = value.replace(/\D/g, '');
+
+					// Check if formatted value doesn't start with '38'
+					if (!formattedValue.startsWith('38')) {
+						formattedValue = '38' + formattedValue;
+					}
+
+					// Update the regular expression pattern to correctly capture the phone number groups
+					formattedValue = formattedValue.replace(/^(\d{2})(\d{3})(\d{3})(\d{2})(\d{2})/, '+$1 $2 $3 $4 $5');
+
+					input.value = formattedValue;
+				}
+
+				const formButton = document.getElementById('form-button');
+
+				function setDisabledAttribute() {
+					const userName = document.getElementById('username').value;
+					const userPhone = document.getElementById('user-phone').value;
+					const userAddress = document.getElementById('user-address').value;
+					const hint = document.querySelector('.client-info-form__hint')
+
+					if (userName && userPhone && userAddress) {
+						formButton.removeAttribute('disabled');
+						hint.style.display = 'none';
+						// hint.style.visibility = 'hidden';
+					} else {
+						formButton.setAttribute('disabled', 'disabled');
+					}
+				}
+
+				document.getElementById('username').addEventListener('input', setDisabledAttribute);
+				document.getElementById('user-phone').addEventListener('input', setDisabledAttribute);
+				document.getElementById('user-address').addEventListener('input', setDisabledAttribute);
+
+				setDisabledAttribute();
 			</script>
 			<section class="add-goods section" id="add-goods">
 				<div class="add-goods__container">
 					<h2 class="add-goods__title title-section">У нас додатково у продажу є:</h2>
-					<div class="add-goods__wrap swiper-container">
-						<div class="add-goods__gallery swiper-wrapper">
 
-							<div class="add-goods__item item-goods swiper-slide">
-								<div class="item-goods__image">
-									<picture><source srcset="img/card-images/image_bottle-plug.webp" type="image/webp"><img src="img/card-images/image_bottle-plug.png" alt="image_bottle_plug" class="item-goods__img" /></picture>
+					<!-- Оболонка слайдера -->
+					<div class="add-goods__slider swiper">
+						<!-- Частина слайдера, що рухається -->
+						<div class="add-goods__wrapper swiper-wrapper">
+							<!-- Слайд -->
+							<div class="add-goods__slide card swiper-slide">
+								<div class="card__image">
+									<picture><source srcset="img/card-images/image_bottle-plug.webp" type="image/webp"><img src="img/card-images/image_bottle-plug.png" alt="image_bottle_plug" class="card__img" /></picture>
 								</div>
-								<div class="item-goods__body">
-									<h3 class="item-goods__title">Пробка для бутлів</h3>
-									<div class="item-goods__price"><span>5.00</span> грн</div>
-									<div class="item-goods__btn">
-										<button type="button" class="item-goods__button">Додати</button>
-									</div>
+								<div class="card__body">
+									<h3 class="card__title">Пробка для бутлів</h3>
+									<div class="card__price"><span>5.00</span> грн</div>
 								</div>
 							</div>
 
-							<div class="add-goods__item item-goods swiper-slide">
-								<div class="item-goods__image">
-									<picture><source srcset="img/card-images/image_bottle.webp" type="image/webp"><img src="img/card-images/image_bottle.png" alt="image_bottle_plug" class="item-goods__img" /></picture>
+							<div class="add-goods__slide card swiper-slide">
+								<div class="card__image">
+									<picture><source srcset="img/card-images/image_bottle_5l.webp" type="image/webp"><img src="img/card-images/image_bottle_5l.png" alt="image_bottle_bottle_5l" class="card__img" /></picture>
 								</div>
-								<div class="item-goods__body">
-									<h3 class="item-goods__title">Бутель ПЕТФ 5л з кришкою та ручкою</h3>
-									<div class="item-goods__price"><span>22.00</span> грн</div>
-									<div class="item-goods__btn">
-										<button type="button" class="item-goods__button">Додати</button>
-									</div>
+								<div class="card__body">
+									<h3 class="card__title">Бутель ПЕТФ 5л з кришкою та ручкою</h3>
+									<div class="card__price"><span>22.00</span> грн</div>
 								</div>
 							</div>
 
-							<div class="add-goods__item item-goods swiper-slide">
-								<div class="item-goods__image">
-									<picture><source srcset="img/card-images/image_bottle.webp" type="image/webp"><img src="img/card-images/image_bottle.png" alt="image_bottle_plug" class="item-goods__img" /></picture>
+							<div class="add-goods__slide card swiper-slide">
+								<div class="card__image">
+									<picture><source srcset="img/card-images/image_bottle_6l.webp" type="image/webp"><img src="img/card-images/image_bottle_6l.png" alt="image_bottle_bottle_6l" class="card__img" /></picture>
 								</div>
-								<div class="item-goods__body">
-									<h3 class="item-goods__title">Бутель ПЕТФ 6л з кришкою та ручкою</h3>
-									<div class="item-goods__price"><span>25.00</span> грн</div>
-									<div class="item-goods__btn">
-										<button type="button" class="item-goods__button">Додати</button>
-									</div>
+								<div class="card__body">
+									<h3 class="card__title">Бутель ПЕТФ 6л з кришкою та ручкою</h3>
+									<div class="card__price"><span>25.00</span> грн</div>
 								</div>
 							</div>
 
-							<div class="add-goods__item item-goods swiper-slide">
-								<div class="item-goods__image">
-									<picture><source srcset="img/card-images/image_bottle.webp" type="image/webp"><img src="img/card-images/image_bottle.png" alt="image_bottle_plug" class="item-goods__img" /></picture>
+							<div class="add-goods__slide card swiper-slide">
+								<div class="card__image">
+									<picture><source srcset="img/card-images/image_bottle_10l.webp" type="image/webp"><img src="img/card-images/image_bottle_10l.png" alt="image_bottle_10l" class="card__img" /></picture>
 								</div>
-								<div class="item-goods__body">
-									<h3 class="item-goods__title">Бутель ПЕТФ 10л з кришкою та ручкою</h3>
-									<div class="item-goods__price"><span>35.00</span> грн</div>
-									<div class="item-goods__btn">
-										<button type="button" class="item-goods__button">Додати</button>
-									</div>
+								<div class="card__body">
+									<h3 class="card__title">Бутель ПЕТФ 10л з кришкою та ручкою</h3>
+									<div class="card__price"><span>35.00</span> грн</div>
 								</div>
 							</div>
 
-							<div class="add-goods__item item-goods swiper-slide">
-								<div class="item-goods__image">
-									<picture><source srcset="img/card-images/image_bottle.webp" type="image/webp"><img src="img/card-images/image_bottle.png" alt="image_bottle_plug" class="item-goods__img" /></picture>
+							<div class="add-goods__slide card swiper-slide">
+								<div class="card__image">
+									<picture><source srcset="img/card-images/handle.webp" type="image/webp"><img src="img/card-images/handle.png" alt="image_bottle_рфтвду" class="card__img" /></picture>
 								</div>
-								<div class="item-goods__body">
-									<h3 class="item-goods__title">Бутель ПЕТФ 10л з кришкою та ручкою</h3>
-									<div class="item-goods__price"><span>35.00</span> грн</div>
-									<div class="item-goods__btn">
-										<button type="button" class="item-goods__button">Додати</button>
-									</div>
+								<div class="card__body">
+									<h3 class="card__title">Ручка для бутля 18,9л</h3>
+									<div class="card__price"><span>80.00</span> грн</div>
 								</div>
 							</div>
 
-							<div class="add-goods__item item-goods swiper-slide">
-								<div class="item-goods__image">
-									<picture><source srcset="img/card-images/image_bottle.webp" type="image/webp"><img src="img/card-images/image_bottle.png" alt="image_bottle_plug" class="item-goods__img" /></picture>
+							<div class="add-goods__slide card swiper-slide">
+								<div class="card__image">
+									<picture><source srcset="img/card-images/water_pump.webp" type="image/webp"><img src="img/card-images/water_pump.png" alt="image_bottle_water_pump" class="card__img" /></picture>
 								</div>
-								<div class="item-goods__body">
-									<h3 class="item-goods__title">Бутель ПЕТФ 10л з кришкою та ручкою</h3>
-									<div class="item-goods__price"><span>35.00</span> грн</div>
-									<div class="item-goods__btn">
-										<button type="button" class="item-goods__button">Додати</button>
-									</div>
+								<div class="card__body">
+									<h3 class="card__title">Помпа для води</h3>
+									<div class="card__price"><span>150.00</span> грн</div>
+								</div>
+							</div>
+
+							<div class="add-goods__slide card swiper-slide">
+								<div class="card__image">
+									<picture><source srcset="img/card-images/water_pump_electric.webp" type="image/webp"><img src="img/card-images/water_pump_electric.png" alt="image_bottle_water_pump_electric" class="card__img" /></picture>
+								</div>
+								<div class="card__body">
+									<h3 class="card__title">Помпа для води електрична</h3>
+									<div class="card__price"><span>230.00</span> грн</div>
 								</div>
 							</div>
 
 						</div>
+						<!-- Якщо потрібна навігація (ліворуч/праворуч) -->
+						<button type="button" class="swiper-button-prev"></button>
+						<button type="button" class="swiper-button-next"></button>
+						<!-- Якщо потрібна пагінація -->
+						<div class="swiper-pagination"></div>
+						<!-- Якщо потрібен скролбар -->
+						<!-- <div class="swiper-scrollbar"></div> -->
 					</div>
+
+
+
 				</div>
+
+
 			</section>
 
 
 			<script>
-				// ===========   Ініціалізація каруселі   ===========
 
-				document.addEventListener('DOMContentLoaded', function() {
-					// Код ініціалізації Swiper тут
-					new Swiper('.add-goods__wrap', {
-						// стрілки
-						navigation: {
-							nextEl: '.swiper-button-next',
-							prevEl: '.swiper-button-prev',
-						},
-						// булети, точки пагінації
-						// pagination: {
-						// 	el: '.swiper-pagination',
-						// 	clickable: true,
-						// 	dynamicBullets: true,
-						// },
-						// scrollbar: {
-						// 	el: '.swiper-scrollbar',
-						// 	draggable: true,
-						// },
-						grabCursor: true,
-						// slideToClickedSlide: true,
-						keyboard: {
-							enabled: true,
-							onlyInViewport: true,
-							pageUpDown: true,
-						},
-						// mousewheel: {
-						// 	sensitivity: 1,
-						// eventsTarget:
-						// },
-						slidesPerView: 'auto',
-						// slidesPerGroup: 5,
-						// watchOverflow: true,
-						// centeredSlides: true,
-						loop: true,
-						// loopedSlides: 4,
-						autoplay: {
-							delay: 2000,
-							stopOnLastSlide: true,
-							disadleOnInteraction: false,
-						},
-						speed: 800,
-						// breakpoints: {
-						//   320: {
-						//     slidesPerView: 1,
-						//   },
-						//   350: {
-						//     slidesPerView: 'auto',
-						//   },
-						//   // 768: {
-						//   //   slidesPerView: 3,
-						//   // },
-						//   // 992: {
-						//   //   slidesPerView: 'auto',
-						//   // },
-						// },
-						// spaceBetween: 20,
-					});
-				});
 			</script>
 			<section class="delivery section" id="delivery">
 				<div class="delivery__container">
@@ -666,21 +739,21 @@
 				<nav class="footer__menu menu-footer">
 					<ul class="menu-footer__list">
 						<li class="menu-footer__item">
-							<a href="" class="menu-footer__link">Замовити</a>
+							<a href="#order" class="menu-footer__link scrolll-link">Замовити</a>
 						</li>
 						<li class="menu-footer__item">
-							<a href="" class="menu-footer__link">Доставка</a>
+							<a href="#delivery" class="menu-footer__link scrolll-link">Доставка</a>
 						</li>
 						<li class="menu-footer__item">
-							<a href="" class="menu-footer__link">Інформація</a>
+							<a href="#information" class="menu-footer__link scrolll-link">Інформація</a>
 						</li>
 					</ul>
 				</nav>
 			</div>
 		</footer>
 	</div>
-	<script src="https://unpkg.com/swiper/swiper-bundle.min.js?_v=20231219213946"></script>
-	<script src="js/app.min.js?_v=20231219213946"></script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js?_v=20231227182021"></script>
+	<script src="js/app.min.js?_v=20231227182021"></script>
 </body>
 
 </html>
